@@ -13,4 +13,4 @@ Responsibilities:
 
 Nathaniel - Conversion Algorithm 
 
-Caroline - UI Design 
+Caroline - UI Design, application setup 
