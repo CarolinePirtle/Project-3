@@ -3,7 +3,7 @@ const leaps = [46828800, 78364801, 109900802, 173059203, 252028804, 315187205, 3
 
 function isLeap(gps_time){
     let isLeap = false
-    for (let i = 0; i < leaps.length; $i++) {
+    for (let i = 0; i < leaps.length; i++) {
        if (gps_time == leaps[i]) {
           isLeap = true
        }
@@ -13,7 +13,7 @@ function isLeap(gps_time){
 
 function countleaps(gps_time, dirFlag){
     let nleaps = 0 // number of leap seconds prior to gpsTime
-    for (i = 0; $i < leaps.length; $i++) {
+    for (i = 0; i < leaps.length; i++) {
         if (dirFlag === 'unix2gps') {
           if (gps_time >= leaps[i] - i) {
              nleaps++
@@ -56,19 +56,21 @@ function gps2UTC(gps_time){
     var unix_time = gps2unix(gps_time)
     var date = new Date(unix_time * 1000)
     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = date.getFullYear()
-    var month = months[date.getMonth()]
-    var day = date.getDate()
-    var hour = date.getHours()
-    var min = date.getMinutes()
-    var sec = date.getSeconds()
+    var year = date.getUTCFullYear()
+    var month = months[date.getUTCMonth()]
+    var day = date.getUTCDate()
+    var hour = date.getUTCHours()
+    var min = date.getUTCMinutes()
+    var sec = date.getUTCSeconds()
     var dateFormatted  = day + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
     return dateFormatted;
 }
 
 function UTC2gps(year, month, day, hours = 0, minutes = 0, seconds = 0){
-    var date = new Date(year, month, day, hours, minutes, seconds)
-    var unix_time = Math.floor(date.getTime() / 1000)
+    var unix_time = (new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds)).getTime() / 1000)
     return unix2gps(unix_time)
 
 }
+//test cases
+console.log(gps2UTC(1262304000))
+console.log(UTC2gps(2020, 1, 5, 23, 59, 42))
