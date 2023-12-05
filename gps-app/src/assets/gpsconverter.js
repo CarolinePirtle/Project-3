@@ -68,9 +68,9 @@ function gps2UTC(gps_time){
 
 function UTC2gps(year, month, day, hours = 0, minutes = 0, seconds = 0){
     var unix_time = (new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds)).getTime() / 1000)
-    return unix2gps(unix_time)
+    return unix2gps(unix_time) + ''
 
 }
-//test cases
+//test
 console.log(gps2UTC(1262304000))
 console.log(UTC2gps(2020, 1, 5, 23, 59, 42))
