@@ -1,6 +1,12 @@
 const leaps = [46828800, 78364801, 109900802, 173059203, 252028804, 315187205, 346723206, 393984007, 425520008, 457056009, 504489610, 
                 551750411, 599184012, 820108813, 914803214, 1025136015, 1119744016, 1167264017]
 
+/**
+ * checks if a gps time is a time that a leap second occurs
+ * @function isLeap 
+ * @param {Number} gps_time gps time to check
+ * @return {Boolean} isLeap whether time is leap time or not 
+ */
 function isLeap(gps_time){
     let isLeap = false
     for (let i = 0; i < leaps.length; i++) {
@@ -11,6 +17,13 @@ function isLeap(gps_time){
     return isLeap
 }
 
+/**
+ * counts number of leap seconds before the given gps time
+ * @function countleaps 
+ * @param {Number} gps_time gps time to check
+ * @param {String} dirFlag whether converting from unix to gps or gps to unix
+ * @return {Number} number of leaps before the time
+ */
 function countleaps(gps_time, dirFlag){
     let nleaps = 0 // number of leap seconds prior to gpsTime
     for (i = 0; i < leaps.length; i++) {
@@ -28,6 +41,12 @@ function countleaps(gps_time, dirFlag){
     return nleaps
  }
 
+ /**
+ * coverts from gps time to unix time
+ * @function gps2unix
+ * @param {Number} gps_time gps time to convert
+ * @return {Number} converted unix time
+ */
 function gps2unix(gps_time){
     let unix_time = gps_time + 315964800
     let nleaps = countleaps(gps_time, 'gps2unix')
@@ -38,6 +57,12 @@ function gps2unix(gps_time){
     return unix_time
 }
 
+ /**
+ * coverts from unix time to gps time
+ * @function unix2gps
+ * @param {Number} unix_time unix time to convert
+ * @return {Number} converted gps time
+ */
 function unix2gps(unix_time){
     // Add offset in seconds
     if (unix_time % 1 != 0) {
@@ -52,6 +77,12 @@ function unix2gps(unix_time){
     return gps_time
 }
 
+ /**
+ * coverts from gps time to UTC time
+ * @function gps2UTC
+ * @param {Number} gps_time gps time to convert
+ * @return {String} converted, formatted UTC time
+ */
 function gps2UTC(gps_time){
     var unix_time = gps2unix(gps_time)
     var date = new Date(unix_time * 1000)
@@ -65,10 +96,19 @@ function gps2UTC(gps_time){
     var dateFormatted  = day + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
     return dateFormatted;
 }
-
+/**
+ * converts from UTC time to gps time
+ * @param {Number} year UTC year
+ * @param {Number} month UTC month
+ * @param {Number} day UTC day
+ * @param {Number} hours UTC hours
+ * @param {Number} minutes UTC minutes
+ * @param {Number} seconds UTC seconds
+ * @returns {Number} converted gps time
+ */
 function UTC2gps(year, month, day, hours = 0, minutes = 0, seconds = 0){
     var unix_time = (new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds)).getTime() / 1000)
-    return unix2gps(unix_time) + ''
+    return unix2gps(unix_time)
 
 }
 //test
