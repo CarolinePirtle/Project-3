@@ -26,7 +26,7 @@ function isLeap(gps_time){
  */
 function countleaps(gps_time, dirFlag){
     let nleaps = 0 // number of leap seconds prior to gpsTime
-    for (i = 0; i < leaps.length; i++) {
+    for (let i = 0; i < leaps.length; i++) {
         if (dirFlag === 'unix2gps') {
           if (gps_time >= leaps[i] - i) {
              nleaps++
