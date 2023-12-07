@@ -105,7 +105,7 @@ function unix2gps(unix_time){
  * @returns {Number} converted gps time
  */
 function UTC2gps(date_time){
-   let split_date_time = date_time.split(' ')
+   var split_date_time = date_time.split(' ')
    if (split_date_time.length > 1){
       let times = split_date_time[1].split(':')
       var hours = parseInt(times[0])
