@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Image, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Button } from 'react-native';
 const leaps = [46828800, 78364801, 109900802, 173059203, 252028804, 315187205, 346723206, 393984007, 425520008, 457056009, 504489610, 
                 551750411, 599184012, 820108813, 914803214, 1025136015, 1119744016, 1167264017]
 
@@ -132,7 +132,8 @@ export default function ConverterFunc() {
 
    return(
        <View style = {styles.container}>
-         <Text>Enter Time Below:</Text>
+         <Text>Enter Time Below (yyyy-mm-d):</Text>
+         <Text>Hours and minutes are optional</Text>
        <TextInput
        style={{
          height: 40,
@@ -140,13 +141,13 @@ export default function ConverterFunc() {
          borderWidth: 2
        }}
        
-       defaultValue="     "
+       defaultValue="   "
        onChangeText={handleTextInputChange}
       
        
      />
-      <Button title='Convert' 
-          onPress={UTC2gps(2003,12,2)} />
+      <Button backgroundColor={'blue'} title='Convert' 
+          onPress={() => UTC2gps(2003,12,2)} />
           <Text>Result: {result}</Text>
      </View>
 
@@ -160,4 +161,20 @@ const styles = StyleSheet.create({
      alignItems: 'center',
      justifyContent: 'center',
    },
- });
+      button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: 'blue',
+      },
+      text: {
+        fontSize: 16,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
+      },
+    });
