@@ -8,12 +8,15 @@ import { Component } from '@angular/core';
   <section>
     <form>
       <input type="text" placeholder="Enter time to convert">
-      <button class="primary" type="button">Convert</button>
+      <button (click)=" testClick()" class="primary" type="button">Convert</button>
     </form>
   </section>
+  <h2>
 `,
   styleUrl: './gps-interface.component.css'
 })
 export class GpsInterfaceComponent {
-
+  testClick() {
+    alert("Clicked");
+  }
 }

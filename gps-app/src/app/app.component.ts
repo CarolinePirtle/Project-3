@@ -13,6 +13,7 @@ import { GpsInterfaceComponent } from './gps-interface/gps-interface.component';
     </header>
     <section class="content">
       <app-gps-interface></app-gps-interface>
+      <h2> Output: </h2>
     </section>
   </main>
 `,
@@ -20,4 +21,7 @@ import { GpsInterfaceComponent } from './gps-interface/gps-interface.component';
 })
 export class AppComponent {
   title = 'gps-app';
+  testClick() {
+    alert("Clicked");
+  }
 }
