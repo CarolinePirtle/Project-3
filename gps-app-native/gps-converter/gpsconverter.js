@@ -163,12 +163,12 @@ export default function ConverterFunc() {
 
    return (
       <View style={styles.container}>
-          <Image
-        source={require('./assets/FP_Satellite_icon.png')}
-        style={styles.image}
-      />
-      <Text>   </Text> 
-      {/* Using the above text as a spacer */}
+         <Image
+            source={require('./assets/FP_Satellite_icon.png')}
+            style={styles.image}
+         />
+         <Text>   </Text>
+         {/* Using the above text as a spacer */}
          <Text style={styles.header}>GPS Time Converter</Text>
          <Text>Enter Time Below:</Text>
          <TextInput
@@ -217,8 +217,8 @@ const styles = StyleSheet.create({
    },
    randomContainer: {
       marginTop: 16,
-   },image: {
+   }, image: {
       width: 200,
-            height: 200, 
-    },
-  });
+      height: 200,
+   },
+});

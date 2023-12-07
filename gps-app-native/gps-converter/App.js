@@ -4,7 +4,7 @@ import ConverterFunc from './gpsconverter';
 
 export default function App() {
   return (
-  <ConverterFunc/>
+    <ConverterFunc />
   );
 }
 
