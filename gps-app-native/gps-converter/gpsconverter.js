@@ -133,10 +133,7 @@ function RandomDateGenerator({ onRandomDateChange }) {
 
    const [randomDate, setRandomDate] = useState('');
  
-   const convertToGPS = () => {
-      const gpsTime = UTC2gps(randomDate);
-      setResult(gpsTime.toString());
-    };
+
    var getRandomDate = function () {
      var request = new XMLHttpRequest();
      request.open('GET', 'https://api.lrs.org/random-date-generator?num_dates=1', true);
