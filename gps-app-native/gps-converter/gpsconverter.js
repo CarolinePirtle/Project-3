@@ -129,53 +129,93 @@ function UTC2gps(date_time){
 console.log(gps2UTC(1262304000))
 //console.log(UTC2gps(2020, 1, 5, 23, 59, 42))
 
+function RandomDateGenerator({ onRandomDateChange }) {
+
+   const [randomDate, setRandomDate] = useState('');
+ 
+   const convertToGPS = () => {
+      const gpsTime = UTC2gps(randomDate);
+      setResult(gpsTime.toString());
+    };
+   var getRandomDate = function () {
+     var request = new XMLHttpRequest();
+     request.open('GET', 'https://api.lrs.org/random-date-generator?num_dates=1', true);
+ 
+     request.onload = function () {
+         var data = JSON.parse(request.responseText);
+         const firstKey = Object.keys(data.data)[0];
+         const { db } = data.data[firstKey];
+         onRandomDateChange(db);
+     };
+   
+     request.send();
+   };
+ 
+   return (
+      <View style={styles.randomContainer}>
+        <Button title="Generate Random Date" onPress={getRandomDate} />
+      </View>
+    );
+  }
 
 export default function ConverterFunc() {
-   var [text, setText] = useState('');
-   var [result, setResult] = useState('');
-
-   return(
-       <View style = {styles.container}>
-         <Text>Enter Time Below (yyyy-mm-dd):</Text>
-         <Text>Hours and minutes are optional</Text>
+   const [text, setText] = useState('');
+   const [result, setResult] = useState('');
+ 
+   const convertToGPS = () => {
+     const gpsTime = UTC2gps(text);
+     setResult(gpsTime.toString());
+   };
+ 
+   return (
+     <View style={styles.container}>
+       <Text style={styles.header}>GPS Time Converter</Text>
+       <Text>Enter Time Below:</Text>
        <TextInput
-       style={{
-         height: 40,
-         borderColor: 'gray',
-         borderWidth: 2
-       }}
-       defaultValue="   "
-       onChangeText={newText=>setText(newText)}
-     />
-      <Button title='Convert' 
-          onPress={() => UTC2gps('2020-1-5')} />
-          <Text>Result: {result}</Text>
-     </View>
-
-   );
-}
-
-const styles = StyleSheet.create({
-   container: {
-     flex: 1,
-     backgroundColor: '#fff',
-     alignItems: 'center',
-     justifyContent: 'center',
-   },
-      button: {
+         style={styles.input}
+         placeholder="YYYY-MM-DD HH:mm:ss"
+         onChangeText={(newText) => setText(newText)}
+         />
+         <Button title="Convert" onPress={convertToGPS} />
+         {result ? <Text style={styles.result}>Result: {result}</Text> : null}
+         <RandomDateGenerator onRandomDateChange={(randomDate) => setText(randomDate)} />
+         {text ? (
+  <View>
+    <Text style={styles.result}>UTC Time: {text}</Text>
+    <Text style={styles.result}>GPS Time: {UTC2gps(text)}</Text>
+  </View>
+) : null}
+       </View>
+     );
+   }
+   const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 4,
-        elevation: 3,
-        backgroundColor: 'blue',
+        padding: 15,
       },
-      text: {
-        fontSize: 16,
-        lineHeight: 21,
+      header: {
+        fontSize: 24,
         fontWeight: 'bold',
-        letterSpacing: 0.25,
-        color: 'white',
+        marginBottom: 16,
+        color: 'blue',
+      },
+      input: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 2,
+        marginBottom: 16,
+        padding: 8,
+        width: '80%',
+      },
+      result: {
+        marginTop: 16,
+        fontSize: 18,
+        fontWeight: 'bold',
+      },
+      randomContainer: {
+        marginTop: 16,
       },
     });
