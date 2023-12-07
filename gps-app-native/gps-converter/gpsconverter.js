@@ -108,9 +108,9 @@ function UTC2gps(datetime){
    let split_date_time = datetime.split(' ')
    if (split_date_time.length > 1){
       let times = split_date_time[1].split(':')
-      var hours = times[0]
-      var minutes = times[1]
-      var seconds = times[2]
+      var hours = parseInt(times[0])
+      var minutes = parseInt(times[1])
+      var seconds = parseInt(times[2])
    }
    else{
       var hours = 0
@@ -118,9 +118,9 @@ function UTC2gps(datetime){
       var seconds = 0
    }
    let dates = datetime.split(' ')[0].split('-')
-   let year = dates[0]
-   let month = dates[1]
-   let day = dates[2]
+   let year = parseInt(dates[0])
+   let month = parseInt(dates[1])
+   let day = parseInt(dates[2])
 
    var unix_time = (new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds)).getTime() / 1000)
    return unix2gps(unix_time)
