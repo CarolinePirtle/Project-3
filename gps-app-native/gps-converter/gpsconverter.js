@@ -117,7 +117,7 @@ function UTC2gps(date_time){
       var minutes = 0
       var seconds = 0
    }
-   let dates = datetime.split(' ')[0].split('-')
+   let dates = date_time.split(' ')[0].split('-')
    let year = parseInt(dates[0])
    let month = parseInt(dates[1])
    let day = parseInt(dates[2])
