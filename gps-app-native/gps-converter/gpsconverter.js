@@ -131,12 +131,8 @@ console.log(UTC2gps(2020, 1, 5, 23, 59, 42))
 
 
 export default function ConverterFunc() {
-   const [input, setInput] = useState('');
-   const [result, setResult] = useState('');
-
-   const handleTextInputChange = (text) => {
-      setInputValue(text);
-    };
+   var [text, setText] = useState('');
+   var [result, setResult] = useState('');
 
    return(
        <View style = {styles.container}>
@@ -148,13 +144,10 @@ export default function ConverterFunc() {
          borderColor: 'gray',
          borderWidth: 2
        }}
-       
        defaultValue="   "
-       onChangeText={handleTextInputChange}
-      
-       
+       onChangeText={newText=>setText(newText)}
      />
-      <Button backgroundColor={'blue'} title='Convert' 
+      <Button title='Convert' 
           onPress={() => UTC2gps(2003,12,2)} />
           <Text>Result: {result}</Text>
      </View>
