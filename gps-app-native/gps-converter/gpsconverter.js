@@ -127,7 +127,7 @@ function UTC2gps(date_time){
 }
 //test
 console.log(gps2UTC(1262304000))
-console.log(UTC2gps(2020, 1, 5, 23, 59, 42))
+//console.log(UTC2gps(2020, 1, 5, 23, 59, 42))
 
 
 export default function ConverterFunc() {
@@ -136,7 +136,7 @@ export default function ConverterFunc() {
 
    return(
        <View style = {styles.container}>
-         <Text>Enter Time Below (yyyy-mm-d):</Text>
+         <Text>Enter Time Below (yyyy-mm-dd):</Text>
          <Text>Hours and minutes are optional</Text>
        <TextInput
        style={{
@@ -148,7 +148,7 @@ export default function ConverterFunc() {
        onChangeText={newText=>setText(newText)}
      />
       <Button title='Convert' 
-          onPress={() => UTC2gps(2003,12,2)} />
+          onPress={() => UTC2gps('2020-1-5')} />
           <Text>Result: {result}</Text>
      </View>
 
