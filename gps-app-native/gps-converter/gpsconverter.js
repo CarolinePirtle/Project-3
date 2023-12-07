@@ -85,7 +85,7 @@ function unix2gps(unix_time){
  * @param {String} gps_time gps time to convert
  * @return {String} converted, formatted UTC time
  */
- export default function gps2UTC(gps_time){
+ function gps2UTC(gps_time){
    gps_time = parseInt(gps_time)
     var unix_time = gps2unix(gps_time)
     var date = new Date(unix_time * 1000)
@@ -104,7 +104,7 @@ function unix2gps(unix_time){
  * @param {String} time time to convert in form XXXX-XX-XX XX:XX:XX
  * @returns {Number} converted gps time
  */
-export default function UTC2gps(datetime){
+function UTC2gps(datetime){
    let dates = datetime.split(' ')[0].split('-')
    let times = datetime.split(' ')[1].split(':')
    let year = dates[0]
