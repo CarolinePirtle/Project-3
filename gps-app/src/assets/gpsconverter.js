@@ -80,10 +80,11 @@ function unix2gps(unix_time){
  /**
  * coverts from gps time to UTC time
  * @function gps2UTC
- * @param {Number} gps_time gps time to convert
+ * @param {String} gps_time gps time to convert
  * @return {String} converted, formatted UTC time
  */
 function gps2UTC(gps_time){
+   gps_time = parseInt(gps_time)
     var unix_time = gps2unix(gps_time)
     var date = new Date(unix_time * 1000)
     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -98,19 +99,23 @@ function gps2UTC(gps_time){
 }
 /**
  * converts from UTC time to gps time
- * @param {Number} year UTC year
- * @param {Number} month UTC month
- * @param {Number} day UTC day
- * @param {Number} hours UTC hours
- * @param {Number} minutes UTC minutes
- * @param {Number} seconds UTC seconds
+ * @param {String} time time to convert
  * @returns {Number} converted gps time
  */
-function UTC2gps(year, month, day, hours = 0, minutes = 0, seconds = 0){
-    var unix_time = (new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds)).getTime() / 1000)
-    return unix2gps(unix_time)
+function UTC2gps(datetime){
+   let dates = datetime.split(' ')[0].split('-')
+   let times = datetime.split(' ')[1].split(':')
+   let year = dates[0]
+   let month = dates[1]
+   let day = dates[2]
+   let hours = times[0]
+   let minutes = times[1]
+   let seconds = times[2]
+
+   var unix_time = (new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds)).getTime() / 1000)
+   return unix2gps(unix_time)
 
 }
 //test
-console.log(gps2UTC(1262304000))
-console.log(UTC2gps(2020, 1, 5, 23, 59, 42))
+console.log(gps2UTC('1262304000'))
+console.log(UTC2gps('2020-01-05 23:59:42'))
