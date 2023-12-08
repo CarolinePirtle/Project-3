@@ -126,7 +126,7 @@ function UTC2gps(date_time) {
    return unix2gps(unix_time)
 }
 //test
-console.log(gps2UTC(1262304000))
+//console.log(gps2UTC(1262304000))
 //console.log(UTC2gps(2020, 1, 5, 23, 59, 42))
 
 function RandomDateGenerator({ onRandomDateChange }) {
@@ -155,10 +155,18 @@ function RandomDateGenerator({ onRandomDateChange }) {
 export default function ConverterFunc() {
    const [text, setText] = useState('');
    const [result, setResult] = useState('');
+   const [conversion_flag, set_Conversion_Flag] = useState('UTC to GPS');
+   const [text_placeholder, set_Text_Placeholder] = useState('YYYY-MM-DD hh:mm:ss')
 
    const convertToGPS = () => {
-      const gpsTime = UTC2gps(text);
-      setResult(gpsTime.toString());
+      if (conversion_flag === 'UTC to GPS'){      
+         const gpsTime = UTC2gps(text);
+         setResult(gpsTime.toString());
+      }
+      else if (conversion_flag === 'GPS to UTC'){
+         const UTCTime = gps2UTC(text);
+         setResult(UTCTime.toString());
+      }
    };
 
    return (
@@ -170,10 +178,30 @@ export default function ConverterFunc() {
          <Text>   </Text>
          {/* Using the above text as a spacer */}
          <Text style={styles.header}>GPS Time Converter</Text>
+         <View style={{ flexDirection:"row" }}>
+            <View>
+               <Button title = "UTC to GPS"
+                  onPress={() => {
+                     set_Conversion_Flag('UTC to GPS')
+                     set_Text_Placeholder('YYYY-MM-DD hh:mm:ss')
+               }}/>
+            </View>
+            <Text>      </Text>
+            {/* Using the above text as a spacer */}
+            <View>
+               <Button title = "GPS to UTC"
+                  onPress={() => {
+                     set_Conversion_Flag('GPS to UTC')
+                     set_Text_Placeholder('Enter GPS time')
+                  }}
+               />
+            </View>
+         </View>
+         <Text style={styles.subheader}>{conversion_flag}</Text>
          <Text>Enter Time Below:</Text>
          <TextInput
             style={styles.input}
-            placeholder="YYYY-MM-DD HH:mm:ss"
+            placeholder={text_placeholder}
             onChangeText={(newText) => setText(newText)}
          />
          <Button title="Convert" onPress={convertToGPS} />
@@ -201,6 +229,10 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       marginBottom: 16,
       color: 'blue',
+   },
+   subheader: {
+      fontSize: 15,
+      fontWeight: 'bold'
    },
    input: {
       height: 40,
