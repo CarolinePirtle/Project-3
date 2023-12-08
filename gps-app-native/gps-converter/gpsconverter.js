@@ -154,6 +154,7 @@ function RandomDateGenerator({ onRandomDateChange }) {
 
 export default function ConverterFunc() {
    const [text, setText] = useState('');
+   const [randomText, setRandomText] = useState('')
    const [result, setResult] = useState('');
    const [conversion_flag, set_Conversion_Flag] = useState('UTC to GPS');
    const [text_placeholder, set_Text_Placeholder] = useState('YYYY-MM-DD hh:mm:ss')
@@ -206,11 +207,11 @@ export default function ConverterFunc() {
          />
          <Button title="Convert" onPress={convertToGPS} />
          {result ? <Text style={styles.result}>Result: {result}</Text> : null}
-         <RandomDateGenerator onRandomDateChange={(randomDate) => setText(randomDate)} />
-         {text ? (
+         <RandomDateGenerator onRandomDateChange={(randomDate) => setRandomText(randomDate)} />
+         {randomText ? (
             <View>
-               <Text style={styles.result}>UTC Time: {text}</Text>
-               <Text style={styles.result}>GPS Time: {UTC2gps(text)}</Text>
+               <Text style={styles.result}>UTC Time: {randomText}</Text>
+               <Text style={styles.result}>GPS Time: {UTC2gps(randomText)}</Text>
             </View>
          ) : null}
       </View>
