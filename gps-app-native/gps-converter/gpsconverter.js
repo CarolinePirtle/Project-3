@@ -198,7 +198,11 @@ export default function ConverterFunc() {
                />
             </View>
          </View>
+         <Text>      </Text>
+         {/* Using the above text as a spacer */}
          <Text style={styles.subheader}>{conversion_flag}</Text>
+         <Text>      </Text>
+         {/* Using the above text as a spacer */}
          <Text>Enter Time Below:</Text>
          <TextInput
             style={styles.input}
@@ -232,7 +236,7 @@ const styles = StyleSheet.create({
       color: 'blue',
    },
    subheader: {
-      fontSize: 15,
+      fontSize: 20,
       fontWeight: 'bold'
    },
    input: {
