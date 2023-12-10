@@ -157,7 +157,7 @@ export default function ConverterFunc() {
    const [randomText, setRandomText] = useState('')
    const [result, setResult] = useState('');
    const [conversion_flag, set_Conversion_Flag] = useState('UTC to GPS');
-   const [text_placeholder, set_Text_Placeholder] = useState('YYYY-MM-DD hh:mm:ss')
+   const [text_placeholder, set_Text_Placeholder] = useState('Enter UTC Time: YYYY-MM-DD hh:mm:ss')
 
    const convertToGPS = () => {
       if (conversion_flag === 'UTC to GPS'){      
@@ -184,7 +184,7 @@ export default function ConverterFunc() {
                <Button title = "UTC to GPS"
                   onPress={() => {
                      set_Conversion_Flag('UTC to GPS')
-                     set_Text_Placeholder('YYYY-MM-DD hh:mm:ss')
+                     set_Text_Placeholder('Enter UTC Time: YYYY-MM-DD hh:mm:ss')
                }}/>
             </View>
             <Text>      </Text>
